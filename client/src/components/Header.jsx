@@ -1,53 +1,13 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import { styled } from '@mui/material/styles';
-
-const ColorButton = styled(Button)(({ theme }) => ({
-    backgroundColor: "#00ADB5",
-    width: "15rem",
-    '&:hover': {
-      backgroundColor: '#0069d9',
-      borderColor: '#0062cc',
-      boxShadow: 'none',
-    },
-    '&:active': {
-      boxShadow: 'none',
-      backgroundColor: '#0062cc',
-      borderColor: '#005cbf',
-    },
-    '&:focus': {
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-    },
-  }));
-
-  const Bar = styled(AppBar)(({ theme }) => ({
-    backgroundColor: "#393E46",
-  }));
+import { Animated } from "react-animated-css";
 
 export default function Header() {
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Bar position="static" >
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Nombre usuario
-          </Typography>
-          <ColorButton color="inherit" size='large'>Login</ColorButton>
-        </Toolbar>
-      </Bar>
-    </Box>
-  );
+
+    return (
+        <header className="h-20 z-50 h-10 relative bg-lightGray w-100% shadow-md">
+            <Animated animationIn="fadeInDown" isVisible={true} className="flex justify-between items-center h-full">
+                <p className="text-sm mx-2 md:text-3xl md:mx-4 text-darkWhite text-center">Challenge Alkemy Full Stack</p>
+                <button className='mx-4 bg-lightBlue h-12 outline-double rounded-md w-32 ease-in-out text-black duration-300 hover:bg-blue-800 hover:text-darkWhite md:w-36 sm:h-8'>Login Or Register</button>
+            </Animated>
+        </header>
+    );
 }
