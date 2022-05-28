@@ -31,6 +31,11 @@ module.exports = (sequelize) => {
                     msg: "Email is required"
                 }
             }
+        },
+        exist: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     }, {
         sequelize: sequelize,
