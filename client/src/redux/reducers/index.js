@@ -1,6 +1,7 @@
 import {
     LOAD_USER,
-    CLEAR_USER
+    CLEAR_USER,
+    LOAD_MOVES
 } from '../actions/index';
 
 const initialState = {
@@ -19,6 +20,11 @@ const rootReducer = (state = initialState, action) => {
             return ({
                 ...state,
                 user: action.payload
+            })
+        case LOAD_MOVES:
+            return ({
+                ...state,
+                moves: action.payload
             })
         default:
             return {

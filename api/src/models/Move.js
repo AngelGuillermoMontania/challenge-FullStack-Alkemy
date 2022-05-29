@@ -20,12 +20,12 @@ module.exports = (sequelize) => {
                 }
             }
         },
-        name: {
+        concept: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: "Is required name"
+                    msg: "Is required concept"
                 },
                 len: {
                     args: [2, 25],

@@ -2,11 +2,11 @@ const { User, Move, Category } = require('./../db.js');
 
 module.exports = {
     create: async (req, res) => {
-        let { id, type, name, amount, date } = req.body;
+        let { id, type, concept, amount, date } = req.body;
         try {
             const move = await Move.create({
                 type,
-                name,
+                concept,
                 amount,
                 date
             })
@@ -30,7 +30,7 @@ module.exports = {
         }
     },
     getAll: async (req, res) => {
-        const { id } = req.body
+        const { id } = req.query
         try {
             const moves = await Move.findAll({
                 where: {

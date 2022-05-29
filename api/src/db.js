@@ -35,8 +35,11 @@ const { User, Move, Category } = sequelize.models;
 User.hasMany(Move)         
 Move.belongsTo(User)
 
-Category.belongsToMany(Move, { through: 'categoryMove', timestamps: false })         
-Move.belongsToMany(Category, { through: 'categoryMove', timestamps: false })
+User.hasMany(Category)
+Category.belongsTo(User)
+
+Category.hasMany(Move)         
+Move.belongsTo(Category)
 
 // We export the connection and the models
 module.exports = {

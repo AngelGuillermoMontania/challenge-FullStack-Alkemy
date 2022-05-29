@@ -3,13 +3,21 @@ const { User, Move, Category } = require('./../db.js');
 module.exports = {
     findOrCreate: async (req, res) => {
         try {
-            const [user] = await User.findOrCreate({
+            const [newUser] = await User.findOrCreate({
                 where: {
                     email: req.body.email,
                 },
                 defaults: {
                     email: req.body.email,
                     name: req.body.email
+                }
+            })
+            const user = await User.findOne({
+                where: {
+                    id: newUser.id
+                },
+                include: {
+                    model: Category
                 }
             })
             res.send({
