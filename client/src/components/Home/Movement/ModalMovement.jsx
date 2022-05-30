@@ -2,7 +2,7 @@ import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import FormMovement from './FormMovement'
 
-export default function ModalMovement({ visibleMovement, setVisibleMovement }) {
+export default function ModalMovement({ visibleMovement, setVisibleMovement, movementToEdit }) {
 
   const cancelButtonRef = useRef(null)
 
@@ -37,7 +37,7 @@ export default function ModalMovement({ visibleMovement, setVisibleMovement }) {
                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-center text-white">
                         Add Move
                     </Dialog.Title>
-                    <FormMovement setVisibleMovement={setVisibleMovement}/>
+                    <FormMovement setVisibleMovement={setVisibleMovement} movementToEdit={movementToEdit}/>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

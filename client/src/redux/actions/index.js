@@ -111,6 +111,22 @@ export function loadMovements(id) {
     }
 }
 
+export function updateMovement(form) {
+    return async (dispatch) => {
+        try {
+            let allMovements = await axios.put(`http://localhost:3001/movements/edit`, form);
+            if(allMovements.data.ok) {
+                return dispatch({
+                    type: LOAD_MOVEMENTS,
+                    payload: allMovements.data.data
+                })
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+
 export function deleteMovement(id) {
     return async (dispatch) => {
         try {

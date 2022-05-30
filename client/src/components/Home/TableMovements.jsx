@@ -3,10 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteMovement } from '../../redux/actions';
 import ButtonsPage from './ButtonsPage';
 import ButtonsFilter from './Filters/ButtonsFilter';
+import ModalMovement from './Movement/ModalMovement';
 
 export default function TableMovements() {
 
     const dispatch = useDispatch()
+    const [ visibleMovementEdit, setVisibleMovementEdit] = React.useState(false)
+    const [ movementToEdit, setMovementToEdit] = React.useState('')
     const movements = useSelector(state => state.movements)
     const [data, setData] = React.useState([]);
     const [page, setPage] = React.useState(0);
@@ -19,6 +22,8 @@ export default function TableMovements() {
 
     return (
         <div className='flex justify-center items-center flex-col w-11/12 mx-auto mt-6 lg:w-full'>
+            
+            <ModalMovement visibleMovement={visibleMovementEdit} setVisibleMovement={setVisibleMovementEdit} movementToEdit={movementToEdit}/>
             
             <ButtonsFilter />
 
@@ -42,7 +47,16 @@ export default function TableMovements() {
                                 <td className='border-2 p-2 hidden sm:table-cell'>{movement.Category.name}</td>
                                 <td className='border-2 p-2'>{
                                     <div className='flex flex-col w-full h-full justify-around sm:flex-row'>
-                                        <button className='inline-flex justify-center my-2 rounded-md border border-transparent shadow-md shadow-black bg-lightBlue text-base font-medium outline-double ease-in-out duration-300 text-black hover:bg-blue-800 hover:text-darkWhite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:text-sm sm:px-2 sm:py-1'>Edit</button>
+                                        <button 
+                                            className='inline-flex justify-center my-2 rounded-md border border-transparent shadow-md shadow-black bg-lightBlue text-base font-medium outline-double ease-in-out duration-300 text-black hover:bg-blue-800 hover:text-darkWhite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:text-sm sm:px-2 sm:py-1'
+                                            onClick={() => {
+                                                setMovementToEdit(movement)
+                                                setVisibleMovementEdit(!visibleMovementEdit)
+                                            }}
+                                        >
+                                            Edit
+                                        </button>
+                                        
                                         <button 
                                             className='inline-flex justify-center my-2 rounded-md border border-transparent shadow-md shadow-black bg-red-700 text-base font-medium ease-in-out duration-300 text-black hover:bg-blue-800 hover:text-darkWhite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:text-sm sm:px-2 sm:py-1'
                                             onClick={() => {

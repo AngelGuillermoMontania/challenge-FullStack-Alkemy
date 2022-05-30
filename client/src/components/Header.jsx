@@ -11,7 +11,10 @@ export default function Header() {
             <Animated animationIn="fadeInDown" isVisible={true} className="flex justify-between items-center h-full">
                 {
                     userDB.email ? 
-                        <p className="text-sm mx-2 md:text-3xl md:mx-4 text-darkWhite text-center">{userDB.email}</p>
+                        <p className="text-sm mx-2 md:text-3xl md:mx-4 text-darkWhite text-center">
+                            {userDB.email}
+                        </p>
+
                     : <p className="text-sm mx-2 md:text-3xl md:mx-4 text-darkWhite text-center">Challenge Alkemy Full Stack</p>
                 }
                 

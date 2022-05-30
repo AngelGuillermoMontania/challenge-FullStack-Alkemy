@@ -3,7 +3,7 @@ import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import FormCategory from './FormCategory'
 
-export default function ModalCategory({visibleCategory, setVisibleCategory}) {
+export default function ModalCategory({visibleCategory, setVisibleCategory, movementToEdit}) {
 
   const cancelButtonRef = useRef(null)
 
@@ -38,7 +38,7 @@ export default function ModalCategory({visibleCategory, setVisibleCategory}) {
                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-center text-white">
                         Add Category
                     </Dialog.Title>
-                    <FormCategory setVisibleCategory={setVisibleCategory}/>
+                    <FormCategory setVisibleCategory={setVisibleCategory} movementToEdit={movementToEdit}/>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

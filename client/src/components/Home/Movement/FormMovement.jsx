@@ -4,13 +4,13 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import validate from '../../../validators/validateCreateMove'
 import ModalCategory from './ModalCategory';
-import { createMovement, loadMovements } from '../../../redux/actions';
+import { createMovement, loadMovements, updateMovement } from '../../../redux/actions';
 import Buttons from './Buttons';
 
-export default function FormMovement({ setVisibleMovement }) {
+export default function FormMovement({ setVisibleMovement, movementToEdit }) {
 
     const dispatch = useDispatch()
-    const [ visibleCategory, setVisibleCategory] = React.useState(false)
+    const [visibleCategory, setVisibleCategory] = React.useState(false)
     const stateRedux = useSelector(state => state)
     const [errors, setErrors] = React.useState({
         empty: false
@@ -18,11 +18,11 @@ export default function FormMovement({ setVisibleMovement }) {
     let useID = React.useId()
     const [newMovement, setNewMovement] = React.useState({
         id: stateRedux.user.id,
-        concept: '',
-        type: '',
-        amount: '',
-        category: "",
-        date: new Date(),
+        concept: movementToEdit?.concept ? movementToEdit.concept : "",
+        type: movementToEdit?.type ? movementToEdit.type : "",
+        amount: movementToEdit?.amount ? movementToEdit.amount : "",
+        category: movementToEdit?.Category.name ? movementToEdit.Category.name : "",
+        date: movementToEdit?.date ? new Date(movementToEdit.date) : new Date(),
     });
 
     const handleSubmit = (event) => {
@@ -46,16 +46,25 @@ export default function FormMovement({ setVisibleMovement }) {
                 ...errors,
                 date: 'Date is required'
             })
-        } 
+        }
     };
 
     const onSubmit = (event) => {
         event.preventDefault()
         try {
-            if(!errors.empty) {
+            if (!errors.empty) {
                 return
             } else {
-                dispatch(createMovement(newMovement))
+                if(movementToEdit) {
+                    dispatch(updateMovement({
+                        ...newMovement,
+                        movementPrevious: {
+                            ...movementToEdit
+                        }
+                    }))
+                } else {
+                    dispatch(createMovement(newMovement))
+                }
                 dispatch(loadMovements(stateRedux.user.id))
                 setVisibleMovement(false)
             }
@@ -82,22 +91,27 @@ export default function FormMovement({ setVisibleMovement }) {
                     errors.concept && (<p className='text-red-400'>{errors.concept}</p>)
                 }
             </div>
-            <div className='m-1 md:m-4'>
-                <label htmlFor='type'>Type</label>
-                <select
-                    id="type"
-                    name="type"
-                    className="focus:ring-indigo-500 my-1 h-8 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                    onChange={handleSubmit}
-                >
-                    <option hidden>~</option>
-                    <option {...newMovement.type === "ENTRY" ? 'selected' : ""} value="ENTRY">ENTRY</option>
-                    <option {...newMovement.type === "EXIT" ? 'selected' : ""} value="EXIT">EXIT</option>
-                </select>
-                {
-                    errors.type && (<p className='text-red-400'>{errors.type}</p>)
-                }
-            </div>
+            {
+                movementToEdit ?
+                    ""
+                : <div className='m-1 md:m-4'>
+                    <label htmlFor='type'>Type</label>
+                    <select
+                        id="type"
+                        name="type"
+                        className="focus:ring-indigo-500 my-1 h-8 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                        onChange={handleSubmit}
+                    >
+                        <option hidden>~</option>
+                        <option value="ENTRY">ENTRY</option>
+                        <option value="EXIT">EXIT</option>
+                    </select>
+                    {
+                        errors.type && (<p className='text-red-400'>{errors.type}</p>)
+                    }
+                </div>
+            }
+
             <div className='m-1 md:m-4'>
                 <div className="hidden sm:relative sm:flex items-center sm:pointer-events-none md:block">
                     <span className="absolute inset-y-0 left-0 pl-3 top-9 text-black sm:text-sm">$</span>
@@ -129,8 +143,17 @@ export default function FormMovement({ setVisibleMovement }) {
                         >
                             <option hidden>~</option>
                             {
-                                stateRedux.categories.map(category => 
-                                    <option key={category.name + useID}>{category.name}</option>
+                                stateRedux.categories.map(category =>
+                                    <option 
+                                        selected={
+                                            newMovement.category === category.name ?
+                                                true
+                                            : false
+                                        }
+                                        key={category.name + useID}
+                                    >
+                                        {category.name}
+                                    </option>
                                 )
                             }
                         </select>
@@ -153,7 +176,7 @@ export default function FormMovement({ setVisibleMovement }) {
                 <div className='flex justify-center'>
                     <Calendar
                         onChange={handleDate}
-                        value={newMovement.date ? newMovement.date : new Date()}
+                        value={newMovement.date}
                         calendarType='US'
                         className='rounded-lg p-2 my-2 bg-darkWhite'
                         name='date'
@@ -164,9 +187,9 @@ export default function FormMovement({ setVisibleMovement }) {
                 }
             </div>
             <div className={Object.values(errors).length === 0 || !errors.empty ? "hidden" : "block"}>
-            <p className='text-red-400'>{errors.date}</p>
+                <p className='text-red-400'>{errors.date}</p>
             </div>
-            <Buttons setVisible={setVisibleMovement} errors={errors} submit={onSubmit}/>
+            <Buttons setVisible={setVisibleMovement} errors={errors} submit={onSubmit} />
         </form>
     )
 }

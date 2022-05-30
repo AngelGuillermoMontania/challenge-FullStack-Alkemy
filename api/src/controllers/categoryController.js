@@ -1,4 +1,4 @@
-const { User, Movement, Category } = require('./../db.js');
+const { User, Movement, Category } = require("./../db.js");
 
 module.exports = {
     getAll: async (req, res) => {
@@ -12,7 +12,7 @@ module.exports = {
             })
             res.send({
                 status: 200,
-                url: "category",
+                url: "category/",
                 method: "get",
                 ok: true,
                 data: categories    
@@ -41,7 +41,7 @@ module.exports = {
                 })
                 res.send({
                     status: 200,
-                    url: "category",
+                    url: "category/",
                     method: "post",
                     ok: true,
                     data: categories    
@@ -60,7 +60,7 @@ module.exports = {
                 })
                 res.send({
                     status: 200,
-                    url: "category",
+                    url: "category/",
                     method: "post",
                     ok: true,
                     data: categories    

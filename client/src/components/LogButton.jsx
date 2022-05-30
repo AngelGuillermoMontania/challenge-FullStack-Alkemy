@@ -23,7 +23,7 @@ export default function LogButton() {
                     onClick={() => logOut()}
                 >LogOut</button>
                     : <button
-                        className='mx-4 bg-lightBlue h-12 text-center outline-double rounded-md w-32 ease-in-out text-black duration-300 hover:bg-blue-800 hover:text-darkWhite md:w-36 sm:h-8'
+                        className='mx-4 bg-lightBlue h-12 text-center outline-double rounded-md w-36 ease-in-out text-black duration-300 hover:bg-blue-800 hover:text-darkWhite md:w-36 sm:h-8'
                         onClick={() => loginWithRedirect()}
                     >Login Or Register</button>
             }

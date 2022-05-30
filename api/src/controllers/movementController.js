@@ -1,4 +1,4 @@
-const { User, Movement, Category } = require('../db.js');
+const { User, Movement, Category } = require("../db.js");
 const { Op } = require("sequelize");
 
 module.exports = {
@@ -47,6 +47,57 @@ module.exports = {
             })
         }
     },
+    update: async (req, res) => {
+        let { id, movementPrevious, type, concept, category, amount, date } = req.body;
+        try {
+            const movementToEdit = await Movement.findByPk(movementPrevious.id)
+            const categorySearch = await Category.findOne({
+                where: {
+                    [Op.and]: [{ UserId: id }, { name:  movementPrevious.Category.name}],
+                }
+            })
+            await categorySearch.removeMovements(await categorySearch.getMovements())
+            const movementUpdate = await Movement.update({
+                type,
+                concept,
+                amount,
+                date
+            }, {
+                where: {
+                    id: movementPrevious.id
+                }
+            })
+            const movementToAss = await Movement.findByPk(movementPrevious.id)
+            const categoryToAss = await Category.findOne({
+                where: {
+                    [Op.and]: [{ UserId: id }, { name: category }],
+                }
+            })
+            await categoryToAss.addMovement(movementToAss)
+            const allMovements = await Movement.findAll({
+                where: {
+                    UserId: id
+                },
+                include: {
+                    model: Category
+                },
+                limit: 100
+            })
+            res.send({
+                status: 200,
+                url: "movements/edit",
+                ok: true,
+                method: "put",
+                data: allMovements     
+            })
+        } catch (error) {
+            console.log(error)
+            res.send({
+                message: error.message,
+                ok: false
+            })
+        }
+    },
     getAll: async (req, res) => {
         const { id } = req.query
         try {
@@ -59,19 +110,19 @@ module.exports = {
                 },
                 limit: 100
             })
-            /* const entries = await Movement.sum('amount',{
+            /* const entries = await Movement.sum("amount",{
                 where: {
                     [Op.and]: [{ UserId: id }, { type: "ENTRY" }],
                 }
             })
-            const exits = await Movement.sum('amount',{
+            const exits = await Movement.sum("amount",{
                 where: {
                     [Op.and]: [{ UserId: id }, { type: "EXIT" }],
                 }
             }) */
             res.send({
                 status: 200,
-                url: "movements",
+                url: "movements/",
                 method: "get",
                 ok: true,
                 data: movements
@@ -107,7 +158,7 @@ module.exports = {
             })
             res.send({
                 status: 200,
-                url: "movements/create",
+                url: "movements/delete",
                 method: "delete",
                 ok: true,
                 data: allMovements  
@@ -134,8 +185,8 @@ module.exports = {
                 })
                 res.send({
                     status: 200,
-                    url: "movements/create",
-                    method: "delete",
+                    url: "movements/type",
+                    method: "get",
                     ok: true,
                     data: entries  
                 })
@@ -151,8 +202,8 @@ module.exports = {
                 })
                 res.send({
                     status: 200,
-                    url: "movements/create",
-                    method: "delete",
+                    url: "movements/type",
+                    method: "get",
                     ok: true,
                     data: exits 
                 })
@@ -168,8 +219,8 @@ module.exports = {
                 })
                 res.send({
                     status: 200,
-                    url: "movements/create",
-                    method: "delete",
+                    url: "movements/type",
+                    method: "get",
                     ok: true,
                     data: movements 
                 })
@@ -213,8 +264,8 @@ module.exports = {
                 })
                 res.send({
                     status: 200,
-                    url: "movements/create",
-                    method: "delete",
+                    url: "movements/category",
+                    method: "get",
                     ok: true,
                     data: entries.filter(entry => entry.Category.name === category)  
                 })
