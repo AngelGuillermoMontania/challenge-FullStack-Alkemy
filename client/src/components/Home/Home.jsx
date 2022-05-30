@@ -6,6 +6,7 @@ import NoSession from '../NoSession'
 import ContainButtons from './Filters/ContainButtons'
 import ModalMovement from './Movement/ModalMovement'
 import Total from './Total'
+import TableMovements from './TableMovements'
 
 export default function Home() {
 
@@ -30,10 +31,15 @@ export default function Home() {
             {
                 isAuthenticated ?
                     <div>
-                        <ContainButtons />
-                        <ModalMovement visibleMovement={visibleMovement} setVisibleMovement={setVisibleMovement} />
                         <Total />
-                        <button onClick={() => setVisibleMovement(!visibleMovement)}>Add Move</button>
+                        <div className='flex justify-center mt-8'>
+                            <button onClick={() => setVisibleMovement(!visibleMovement)} className='w-4/12 shadow-md shadow-black inline-flex justify-center rounded-md border border-transparent bg-lightBlue text-base font-medium outline-double ease-in-out duration-300 text-black hover:bg-blue-800 hover:text-darkWhite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:text-sm sm:px-2 sm:py-1'
+                            >Add Move
+                            </button>
+                        </div>
+                        <ModalMovement visibleMovement={visibleMovement} setVisibleMovement={setVisibleMovement} />
+                        <ContainButtons />
+                        <TableMovements />
                     </div>
                 : <NoSession />
             }

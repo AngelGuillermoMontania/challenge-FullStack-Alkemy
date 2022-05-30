@@ -6,12 +6,12 @@ export default function Total() {
     const stateRedux = useSelector(state => state)
 
     return (
-        <div className='flex justify-around my-8'>
-            <p className='text-white text-2xl sm:text-8xl text-shadow'>${stateRedux?.entries}</p>
-            <p className='text-white text-2xl sm:text-8xl text-shadow'> - </p>
-            <p className='text-white text-2xl sm:text-8xl text-shadow'>${stateRedux?.exits}</p>
-            <p className='text-white text-2xl sm:text-8xl text-shadow'> = </p>
-            <p className='text-white text-2xl sm:text-8xl text-shadow'>$
+        <div className='flex justify-around my-12'>
+            <p className='text-white text-2xl md:text-7xl text-shadow'>${stateRedux?.entries}</p>
+            <p className='text-white text-2xl md:text-7xl text-shadow'> - </p>
+            <p className='text-white text-2xl md:text-7xl text-shadow'>${stateRedux?.exits}</p>
+            <p className='text-white text-2xl md:text-7xl text-shadow'> = </p>
+            <p className='text-white text-2xl md:text-7xl text-shadow'>$
                 {
                     stateRedux?.entries - stateRedux?.exits
                 }

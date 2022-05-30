@@ -9,6 +9,9 @@ module.exports = {
         "lightGray": "#393E46",
         "lightBlue": "#00ADB5",
         "darkWhite": "#DDDDDD"
+      },
+      screens: {
+        'extraSM': '320px',
       }
     },
   },
