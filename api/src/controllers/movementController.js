@@ -54,6 +54,9 @@ module.exports = {
                 where: {
                     UserId: id
                 },
+                include: {
+                    model: Category
+                },
                 limit: 100
             })
             /* const entries = await Movement.sum('amount',{
@@ -115,5 +118,112 @@ module.exports = {
                 ok: false
             })
         }
-    }
+    },
+    Type: async (req, res) => {
+        const { UserId, method } = req.query
+        try {
+            if(method === "ENTRY") {
+                const entries = await Movement.findAll({
+                    where: {
+                        [Op.and]: [{ UserId, }, { type: method }],
+                    },
+                    include: {
+                        model: Category
+                    },
+                    limit: 100
+                })
+                res.send({
+                    status: 200,
+                    url: "movements/create",
+                    method: "delete",
+                    ok: true,
+                    data: entries  
+                })
+            } else if (method === "EXIT") {
+                const exits = await Movement.findAll({
+                    where: {
+                        [Op.and]: [{ UserId, }, { type: method }],
+                    },
+                    include: {
+                        model: Category
+                    },
+                    limit: 100
+                })
+                res.send({
+                    status: 200,
+                    url: "movements/create",
+                    method: "delete",
+                    ok: true,
+                    data: exits 
+                })
+            } else {
+                const movements = await Movement.findAll({
+                    where: {
+                        UserId,
+                    },
+                    include: {
+                        model: Category
+                    },
+                    limit: 100
+                })
+                res.send({
+                    status: 200,
+                    url: "movements/create",
+                    method: "delete",
+                    ok: true,
+                    data: movements 
+                })
+            } 
+        } catch (error) {
+            res.send({
+                message: error.message,
+                ok: false
+            })
+        }
+    },
+    Category: async (req, res) => {
+        const { UserId, category } = req.query
+        try {
+            if(category === "~") {
+                const allMovements = await Movement.findAll({
+                    where: {
+                        UserId: UserId,
+                    },
+                    include: {
+                        model: Category,
+                    },
+                    limit: 100
+                })
+                res.send({
+                    status: 200,
+                    url: "movements/create",
+                    method: "delete",
+                    ok: true,
+                    data: allMovements 
+                })
+            } else {
+                const entries = await Movement.findAll({
+                    where: {
+                        UserId: UserId,
+                    },
+                    include: {
+                        model: Category,
+                    },
+                    limit: 100
+                })
+                res.send({
+                    status: 200,
+                    url: "movements/create",
+                    method: "delete",
+                    ok: true,
+                    data: entries.filter(entry => entry.Category.name === category)  
+                })
+            } 
+        } catch (error) {
+            res.send({
+                message: error.message,
+                ok: false
+            })
+        }
+    },
 }

@@ -4,8 +4,7 @@ import {
     LOAD_CATEGORIES,
     CLEAR_CATEGORIES,
     LOAD_MOVEMENTS,
-    CLEAR_MOVEMENTS,
-    DELETE_MOVEMENT
+    CLEAR_MOVEMENTS
 } from '../actions/index';
 
 const initialState = {

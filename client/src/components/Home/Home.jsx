@@ -3,7 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { loadUser, loadMovements, loadCategories } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import NoSession from '../NoSession'
-import ContainButtons from './Filters/ContainButtons'
 import ModalMovement from './Movement/ModalMovement'
 import Total from './Total'
 import TableMovements from './TableMovements'
@@ -38,7 +37,7 @@ export default function Home() {
                             </button>
                         </div>
                         <ModalMovement visibleMovement={visibleMovement} setVisibleMovement={setVisibleMovement} />
-                        <ContainButtons />
+                        
                         <TableMovements />
                     </div>
                 : <NoSession />
