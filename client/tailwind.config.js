@@ -11,7 +11,8 @@ module.exports = {
         "darkWhite": "#DDDDDD"
       },
       screens: {
-        'extraSM': '320px',
+        'ssm': '319px',
+        'extraSM': '370px',
       }
     },
   },

@@ -110,3 +110,19 @@ export function loadMovements(id) {
         }
     }
 }
+
+export function deleteMovement(id) {
+    return async (dispatch) => {
+        try {
+            let allMovements = await axios.delete(`http://localhost:3001/movements/delete?id=${id}`);
+            if(allMovements.data.ok) {
+                return dispatch({
+                    type: LOAD_MOVEMENTS,
+                    payload: allMovements.data.data
+                })
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}

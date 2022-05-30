@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 module.exports = {
     create: async (req, res) => {
-        let { id, type, concept, amount, date } = req.body;
+        let { id, type, concept, category, amount, date } = req.body;
         try {
             const newMovement = await Movement.create({
                 type,
@@ -16,10 +16,19 @@ module.exports = {
                     id
                 }
             })
+            const categorySearch = await Category.findOne({
+                where: {
+                    name: category
+                }
+            })
             await user.addMovement(newMovement)
-            const movements = await Movement.findAll({
+            await categorySearch.addMovement(newMovement)
+            const allMovements = await Movement.findAll({
                 where: {
                     UserId: id
+                },
+                include: {
+                    model: Category
                 },
                 limit: 100
             })
@@ -28,7 +37,7 @@ module.exports = {
                 url: "movements/create",
                 ok: true,
                 method: "post",
-                data: movements     
+                data: allMovements     
             })
         } catch (error) {
             console.log(error)
@@ -72,10 +81,22 @@ module.exports = {
         }
     },
     destroy: async (req, res) => {
-        const { UserId, id } = req.body
+        const { id } = req.query
         try {
-            const user = await User.findByPk(UserId)
-            user.removeMovements(await Movement.findByPk(id))
+            const MovementToDestroy = await Movement.findByPk(id)
+            const user = await User.findByPk(MovementToDestroy.UserId)
+            const category = await Category.findByPk(MovementToDestroy.CategoryId)
+            await user.removeMovements(MovementToDestroy)
+            await category.removeMovements(MovementToDestroy)
+            const allMovements = await Movement.findAll({
+                where: {
+                    UserId: MovementToDestroy.UserId,
+                },
+                include: {
+                    model: Category
+                },
+                limit: 100
+            })
             await Movement.destroy({
                 where: {
                     id
@@ -85,7 +106,8 @@ module.exports = {
                 status: 200,
                 url: "movements/create",
                 method: "delete",
-                ok: true     
+                ok: true,
+                data: allMovements  
             })
         } catch (error) {
             res.send({

@@ -4,7 +4,8 @@ import {
     LOAD_CATEGORIES,
     CLEAR_CATEGORIES,
     LOAD_MOVEMENTS,
-    CLEAR_MOVEMENTS
+    CLEAR_MOVEMENTS,
+    DELETE_MOVEMENT
 } from '../actions/index';
 
 const initialState = {
@@ -39,10 +40,9 @@ const rootReducer = (state = initialState, action) => {
         case LOAD_MOVEMENTS:
             let entries = action.payload.filter(movement => movement.type === "ENTRY").reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0)
             let exits = action.payload.filter(movement => movement.type === "EXIT").reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0)
-            console.log(entries)
             return ({
                 ...state,
-                movements: action.payload,
+                movements: action.payload.reverse(),
                 entries,
                 exits
             })
