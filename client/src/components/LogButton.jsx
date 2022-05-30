@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useDispatch } from 'react-redux'
-import { clearUser } from '../redux/actions'
+import { clearCategories, clearMovements, clearUser } from '../redux/actions'
 
 export default function LogButton() {
 
@@ -10,6 +10,8 @@ export default function LogButton() {
 
     const logOut = () => {
         dispatch(clearUser())
+        dispatch(clearCategories())
+        dispatch(clearMovements())
         logout({ returnTo: window.location.origin })
     }
 

@@ -1,15 +1,14 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import Form from './Form'
+import FormMovement from './FormMovement'
 
-export default function ModalMove({ open, setOpen }) {
+export default function ModalMovement({ visibleMovement, setVisibleMovement }) {
 
   const cancelButtonRef = useRef(null)
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-50" initialFocus={cancelButtonRef} onClose={setOpen}>
+    <Transition.Root show={visibleMovement} as={Fragment}>
+      <Dialog as="div" className="relative z-50" initialFocus={cancelButtonRef} onClose={setVisibleMovement}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -38,7 +37,7 @@ export default function ModalMove({ open, setOpen }) {
                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-center text-white">
                         Add Move
                     </Dialog.Title>
-                    <Form setOpen={setOpen}/>
+                    <FormMovement setVisibleMovement={setVisibleMovement}/>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

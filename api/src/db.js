@@ -29,17 +29,17 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 // To relate the models we do a destructuring
-const { User, Move, Category } = sequelize.models;
+const { User, Movement, Category } = sequelize.models;
 
 // Relations
-User.hasMany(Move)         
-Move.belongsTo(User)
+User.hasMany(Movement)         
+Movement.belongsTo(User)
 
 User.hasMany(Category)
 Category.belongsTo(User)
 
-Category.hasMany(Move)         
-Move.belongsTo(Category)
+Category.hasMany(Movement)         
+Movement.belongsTo(Category)
 
 // We export the connection and the models
 module.exports = {

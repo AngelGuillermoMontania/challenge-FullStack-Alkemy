@@ -2,7 +2,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const usersRouter = require('./routes/usersRouter.js');
-const movesRouter = require("./routes/movesRouter.js")
+const movementsRouter = require("./routes/movementsRouter.js")
+const categoryRouter = require("./routes/categoriesRouter.js")
 
 // Require the database
 require('./db.js');
@@ -26,7 +27,8 @@ server.use((req, res, next) => {
 
 // Main routes
 server.use('/users', usersRouter);
-server.use('/moves', movesRouter);
+server.use('/movements', movementsRouter);
+server.use('/categories', categoryRouter);
 
 // Error catching endware
 server.use((err, req, res, next) => { 
