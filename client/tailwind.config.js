@@ -11,8 +11,11 @@ module.exports = {
         "darkWhite": "#DDDDDD"
       },
       screens: {
-        'ssm': '319px',
-        'extraSM': '370px',
+        "ssm": "319px",
+        "extraSM": "370px",
+      },
+      fontFamily: {
+        "pers": ["Noto Serif", "serif"]
       }
     },
   },

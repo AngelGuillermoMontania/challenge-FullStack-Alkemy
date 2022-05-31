@@ -36,8 +36,8 @@ module.exports = (sequelize) => {
     }, {
         sequelize: sequelize,
         createdAt: false,
-        modelName: 'User',
-        tableName: 'Users',
+        modelName: "User",
+        tableName: "Users",
         timestamps: false,
         hooks: {
             beforeUpdate: (user, options) => {

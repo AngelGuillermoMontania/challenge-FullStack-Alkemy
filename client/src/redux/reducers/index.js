@@ -5,7 +5,7 @@ import {
     CLEAR_CATEGORIES,
     LOAD_MOVEMENTS,
     CLEAR_MOVEMENTS
-} from '../actions/index';
+} from "../actions/index";
 
 const initialState = {
     movements: [],

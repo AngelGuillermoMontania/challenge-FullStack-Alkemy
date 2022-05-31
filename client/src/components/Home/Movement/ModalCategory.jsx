@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import FormCategory from './FormCategory'
+import { Fragment, useRef } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import FormCategory from "./FormCategory"
 
 export default function ModalCategory({visibleCategory, setVisibleCategory, movementToEdit}) {
 

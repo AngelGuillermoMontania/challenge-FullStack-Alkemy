@@ -11,11 +11,11 @@ module.exports = (sequelize) => {
         },
         type: {
             type: DataTypes.ENUM,
-            values: ['ENTRY', 'EXIT'],
+            values: ["ENTRY", "EXIT"],
             allowNull: false,
             validate: {
                 isIn: {
-                    args: [['ENTRY', 'EXIT']],
+                    args: [["ENTRY", "EXIT"]],
                     msg: "Required is ENTRY or EXIT",
                 }
             }
@@ -56,8 +56,8 @@ module.exports = (sequelize) => {
         }
     }, {
         sequelize: sequelize,
-        modelName: 'Movement',
-        tableName: 'Movements',
+        modelName: "Movement",
+        tableName: "Movements",
         timestamps: false,
         hooks: {
             beforeCreate: (user, options) => {

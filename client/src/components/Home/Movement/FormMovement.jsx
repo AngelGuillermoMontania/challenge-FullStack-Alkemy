@@ -1,11 +1,11 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import validate from '../../../validators/validateCreateMove'
-import ModalCategory from './ModalCategory';
-import { createMovement, loadMovements, updateMovement } from '../../../redux/actions';
-import Buttons from './Buttons';
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import validate from "../../../validators/validateCreateMove"
+import ModalCategory from "./ModalCategory";
+import { createMovement, loadMovements, updateMovement } from "../../../redux/actions";
+import Buttons from "./Buttons";
 
 export default function FormMovement({ setVisibleMovement, movementToEdit }) {
 
@@ -44,7 +44,7 @@ export default function FormMovement({ setVisibleMovement, movementToEdit }) {
         if (!newMovement.date) {
             setErrors({
                 ...errors,
-                date: 'Date is required'
+                date: "Date is required"
             })
         }
     };
@@ -76,8 +76,8 @@ export default function FormMovement({ setVisibleMovement, movementToEdit }) {
 
     return (
         <form>
-            <div className='m-1 md:m-4'>
-                <label htmlFor='concept'>Concept</label>
+            <div className="m-1 md:m-4">
+                <label htmlFor="concept">Concept</label>
                 <input
                     type="text"
                     name="concept"
@@ -88,14 +88,14 @@ export default function FormMovement({ setVisibleMovement, movementToEdit }) {
                     placeholder="Enter your concept"
                 />
                 {
-                    errors.concept && (<p className='text-red-400'>{errors.concept}</p>)
+                    errors.concept && (<p className="text-red-400">{errors.concept}</p>)
                 }
             </div>
             {
                 movementToEdit ?
                     ""
-                : <div className='m-1 md:m-4'>
-                    <label htmlFor='type'>Type</label>
+                : <div className="m-1 md:m-4">
+                    <label htmlFor="type">Type</label>
                     <select
                         id="type"
                         name="type"
@@ -107,16 +107,16 @@ export default function FormMovement({ setVisibleMovement, movementToEdit }) {
                         <option value="EXIT">EXIT</option>
                     </select>
                     {
-                        errors.type && (<p className='text-red-400'>{errors.type}</p>)
+                        errors.type && (<p className="text-red-400">{errors.type}</p>)
                     }
                 </div>
             }
 
-            <div className='m-1 md:m-4'>
+            <div className="m-1 md:m-4">
                 <div className="hidden sm:relative sm:flex items-center sm:pointer-events-none md:block">
                     <span className="absolute inset-y-0 left-0 pl-3 top-9 text-black sm:text-sm">$</span>
                 </div>
-                <label htmlFor='amount'>Amount (Accept decimals. Ej: 100.50)</label>
+                <label htmlFor="amount">Amount (Accept decimals. Ej: 100.50)</label>
                 <input
                     type="number"
                     name="amount"
@@ -127,13 +127,13 @@ export default function FormMovement({ setVisibleMovement, movementToEdit }) {
                     placeholder="Enter amount"
                 />
                 {
-                    errors.amount && (<p className='text-red-400'>{errors.amount}</p>)
+                    errors.amount && (<p className="text-red-400">{errors.amount}</p>)
                 }
             </div>
-            <div className='m-1 md:m-4'>
-                <label htmlFor='category'>Category</label>
-                <div className='flex justify-around items-center'>
-                    <div className='w-2/4 mx-2 md:w-3/4 md:m-2/4 md:mx-2'>
+            <div className="m-1 md:m-4">
+                <label htmlFor="category">Category</label>
+                <div className="flex justify-around items-center">
+                    <div className="w-2/4 mx-2 md:w-3/4 md:m-2/4 md:mx-2">
                         <select
                             name="category"
                             id="category"
@@ -143,7 +143,7 @@ export default function FormMovement({ setVisibleMovement, movementToEdit }) {
                         >
                             <option hidden>~</option>
                             {
-                                stateRedux.categories.map(category =>
+                                stateRedux?.categories?.map(category =>
                                     <option 
                                         selected={
                                             newMovement.category === category.name ?
@@ -168,26 +168,26 @@ export default function FormMovement({ setVisibleMovement, movementToEdit }) {
                 </div>
                 <ModalCategory visibleCategory={visibleCategory} setVisibleCategory={setVisibleCategory} />
                 {
-                    errors.category && (<p className='text-red-400'>{errors.category}</p>)
+                    errors.category && (<p className="text-red-400">{errors.category}</p>)
                 }
             </div>
-            <div className='m-1 md:m-4 relative'>
-                <label htmlFor='date'>Select your day</label>
-                <div className='flex justify-center'>
+            <div className="m-1 md:m-4 relative">
+                <label htmlFor="date">Select your day</label>
+                <div className="flex justify-center">
                     <Calendar
                         onChange={handleDate}
                         value={newMovement.date}
-                        calendarType='US'
-                        className='rounded-lg p-2 my-2 bg-darkWhite'
-                        name='date'
+                        calendarType="US"
+                        className="rounded-lg p-2 my-2 bg-darkWhite"
+                        name="date"
                     />
                 </div>
                 {
-                    errors.date && (<p className='text-red-400'>{errors.date}</p>)
+                    errors.date && (<p className="text-red-400">{errors.date}</p>)
                 }
             </div>
             <div className={Object.values(errors).length === 0 || !errors.empty ? "hidden" : "block"}>
-                <p className='text-red-400'>{errors.date}</p>
+                <p className="text-red-400">{errors.date}</p>
             </div>
             <Buttons setVisible={setVisibleMovement} errors={errors} submit={onSubmit} />
         </form>

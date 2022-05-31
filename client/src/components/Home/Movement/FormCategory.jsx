@@ -1,8 +1,8 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import validate from '../../../validators/validateCreateCategory'
-import { createCategory } from '../../../redux/actions';
-import Buttons from './Buttons';
+import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import validate from "../../../validators/validateCreateCategory"
+import { createCategory } from "../../../redux/actions";
+import Buttons from "./Buttons";
 
 export default function FormCategory({setVisibleCategory}) {
 
@@ -44,8 +44,8 @@ export default function FormCategory({setVisibleCategory}) {
 
     return (
         <form>
-            <div className='m-1 md:m-4'>
-                <label htmlFor='category'>Concept</label>
+            <div className="m-1 md:m-4">
+                <label htmlFor="category">Concept</label>
                 <input
                     type="text"
                     name="category"
@@ -56,7 +56,7 @@ export default function FormCategory({setVisibleCategory}) {
                     placeholder="Enter your concept"
                 />
                 {
-                    errors.category && (<p className='text-red-400'>{errors.category}</p>)
+                    errors.category && (<p className="text-red-400">{errors.category}</p>)
                 }
             </div>
             <Buttons setVisible={setVisibleCategory} errors={errors} submit={onSubmit} />

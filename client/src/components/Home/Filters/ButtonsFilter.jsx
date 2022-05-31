@@ -1,16 +1,16 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { filterCategory, filterType } from '../../../redux/actions'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { filterCategory, filterType } from "../../../redux/actions";
 
 export default function ButtonsFilter() {
 
-    const dispatch = useDispatch()
-    const stateRedux = useSelector(state => state)
+    const dispatch = useDispatch();
+    const stateRedux = useSelector(state => state);
 
     return (
-        <div className='flex justify-around w-full my-8'>
-            <div className='mx-1'>
-                <label htmlFor='type'>Type</label>
+        <div className="flex justify-around w-full my-8">
+            <div className="mx-1">
+                <label htmlFor="type" className="text-white">Type</label>
                 <select
                     name="type"
                     id="type"
@@ -23,8 +23,8 @@ export default function ButtonsFilter() {
                     <option value="EXIT">EXIT</option>
                 </select>
             </div>
-            <div className='mx-1'>
-                <label htmlFor='category'>Category</label>
+            <div className="mx-1">
+                <label htmlFor="category" className="text-white">Category</label>
                 <select
                     name="category"
                     id="category"

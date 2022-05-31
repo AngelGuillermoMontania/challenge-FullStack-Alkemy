@@ -1,6 +1,6 @@
-import { Fragment, useRef } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import FormMovement from './FormMovement'
+import { Fragment, useRef } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import FormMovement from "./FormMovement"
 
 export default function ModalMovement({ visibleMovement, setVisibleMovement, movementToEdit }) {
 

@@ -1,4 +1,4 @@
-const { User, Move, Category } = require('./../db.js');
+const { User, Move, Category } = require("./../db.js");
 
 module.exports = {
     findOrCreate: async (req, res) => {
@@ -11,7 +11,7 @@ module.exports = {
                     email: req.body.email,
                     name: req.body.email
                 }
-            })
+            });
             const user = await User.findOne({
                 where: {
                     id: newUser.id
@@ -19,18 +19,21 @@ module.exports = {
                 include: {
                     model: Category
                 }
-            })
+            });
             res.send({
                 status: 200,
                 url: "users/create",
                 ok: true,
                 data: user
-            })
+            });
         } catch (error) {
-            console.log(error.msg)
+            res.send({
+                message: error.message,
+                ok: false
+            });
         }
     },
-    editName: async (req, res) => {
+    /* editName: async (req, res) => {
         const { email, name } = req.body
         try {
             await User.update({
@@ -49,5 +52,5 @@ module.exports = {
         } catch (error) {
             console.log(error.msg)
         }
-    }
-}
+    } */
+};

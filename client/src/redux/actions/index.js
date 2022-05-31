@@ -1,17 +1,17 @@
-import axios from 'axios'
+import axios from "axios";
 
-export const LOAD_USER = 'LOAD_USER';
-export const CLEAR_USER = 'CLEAR_USER';
-export const LOAD_MOVEMENTS = 'LOAD_MOVEMENTS';
-export const CLEAR_MOVEMENTS = 'CLEAR_MOVEMENTS';
-export const FILTERAMOUNT_MOVEMENTS = 'FILTERAMOUNT_MOVEMENTS';
-export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
-export const CLEAR_CATEGORIES = 'CLEAR_CATEGORIES';
+export const LOAD_USER = "LOAD_USER";
+export const CLEAR_USER = "CLEAR_USER";
+export const LOAD_MOVEMENTS = "LOAD_MOVEMENTS";
+export const CLEAR_MOVEMENTS = "CLEAR_MOVEMENTS";
+export const FILTERAMOUNT_MOVEMENTS = "FILTERAMOUNT_MOVEMENTS";
+export const LOAD_CATEGORIES = "LOAD_CATEGORIES";
+export const CLEAR_CATEGORIES = "CLEAR_CATEGORIES";
 
 export function loadUser(email) {
     return async (dispatch) => {
         try {
-            let userDB = await axios.post('http://localhost:3001/users',{
+            let userDB = await axios.post("http://localhost:3001/users",{
                 email
             });
             if(userDB.data.ok) {
@@ -19,19 +19,19 @@ export function loadUser(email) {
                     type: LOAD_USER,
                     payload: userDB.data.data
                 })
-            }
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
-}
+};
 
 export function clearUser() {
     return ({
         type: CLEAR_USER,
         payload: {}
-    })
-}
+    });
+};
 
 export function createCategory(form) {
     return async (dispatch) => {
@@ -42,12 +42,12 @@ export function createCategory(form) {
                     type: LOAD_CATEGORIES,
                     payload: allCategories.data.data
                 })
-            }
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
-}
+};
 
 export function loadCategories(id) {
     return async (dispatch) => {
@@ -57,10 +57,10 @@ export function loadCategories(id) {
                 return dispatch({
                     type: LOAD_CATEGORIES,
                     payload: allCategories.data.data
-                })
-            }
+                });
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
 }
@@ -69,15 +69,15 @@ export function clearCategories() {
     return ({
         type: CLEAR_CATEGORIES,
         payload: {}
-    })
-}
+    });
+};
 
 export function clearMovements() {
     return ({
         type: CLEAR_MOVEMENTS,
         payload: {}
-    })
-}
+    });
+};
 
 export function createMovement(form) {
     return async (dispatch) => {
@@ -88,12 +88,12 @@ export function createMovement(form) {
                     type: LOAD_MOVEMENTS,
                     payload: allMoves.data.data
                 })
-            }
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
-}
+};
 
 export function loadMovements(id) {
     return async (dispatch) => {
@@ -103,13 +103,13 @@ export function loadMovements(id) {
                 return dispatch({
                     type: LOAD_MOVEMENTS,
                     payload: allMovements.data.data
-                })
-            }
+                });
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
-}
+};
 
 export function updateMovement(form) {
     return async (dispatch) => {
@@ -119,10 +119,10 @@ export function updateMovement(form) {
                 return dispatch({
                     type: LOAD_MOVEMENTS,
                     payload: allMovements.data.data
-                })
-            }
+                });
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
 }
@@ -135,13 +135,13 @@ export function deleteMovement(id) {
                 return dispatch({
                     type: LOAD_MOVEMENTS,
                     payload: allMovements.data.data
-                })
-            }
+                });
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
-}
+};
 
 export function filterType(UserId, value) {
     return async (dispatch) => {
@@ -151,13 +151,13 @@ export function filterType(UserId, value) {
                 return dispatch({
                     type: LOAD_MOVEMENTS,
                     payload: allMovements.data.data
-                })
-            }
+                });
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
-}
+};
 
 export function filterCategory(UserId, value) {
     return async (dispatch) => {
@@ -167,10 +167,10 @@ export function filterCategory(UserId, value) {
                 return dispatch({
                     type: LOAD_MOVEMENTS,
                     payload: allMovements.data.data
-                })
-            }
+                });
+            };
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
-}
+};

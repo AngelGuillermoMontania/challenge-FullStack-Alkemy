@@ -24,8 +24,8 @@ module.exports = (sequelize) => {
         }
     }, {
         sequelize: sequelize,
-        modelName: 'Category',
-        tableName: 'Categories',
+        modelName: "Category",
+        tableName: "Categories",
         timestamps: false,
         hooks: {
             beforeCreate: (category, options) => {
