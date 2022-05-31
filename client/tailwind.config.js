@@ -9,6 +9,13 @@ module.exports = {
         "lightGray": "#393E46",
         "lightBlue": "#00ADB5",
         "darkWhite": "#DDDDDD"
+      },
+      screens: {
+        "ssm": "319px",
+        "extraSM": "370px",
+      },
+      fontFamily: {
+        "pers": ["Noto Serif", "serif"]
       }
     },
   },

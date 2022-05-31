@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
@@ -15,10 +15,10 @@ const basename = path.basename(__filename);
 const modelDefiners = [];
 
 // We read all the files from the Models folder, require them and add them to the modelDefiners array
-fs.readdirSync(path.join(__dirname, '/models'))
-.filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
+fs.readdirSync(path.join(__dirname, "/models"))
+.filter((file) => (file.indexOf(".") !== 0) && (file !== basename) && (file.slice(-3) === ".js"))
 .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, '/models', file)));
+    modelDefiners.push(require(path.join(__dirname, "/models", file)));
 });
 
 // We inject the connection (sequelize) to all the models
@@ -29,14 +29,17 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 // To relate the models we do a destructuring
-const { User, Move, Category } = sequelize.models;
+const { User, Movement, Category } = sequelize.models;
 
 // Relations
-User.hasMany(Move)         
-Move.belongsTo(User)
+User.hasMany(Movement);       
+Movement.belongsTo(User);
 
-Category.belongsToMany(Move, { through: 'categoryMove', timestamps: false })         
-Move.belongsToMany(Category, { through: 'categoryMove', timestamps: false })
+User.hasMany(Category);
+Category.belongsTo(User);
+
+Category.hasMany(Movement);         
+Movement.belongsTo(Category);
 
 // We export the connection and the models
 module.exports = {

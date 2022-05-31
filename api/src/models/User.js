@@ -26,6 +26,7 @@ module.exports = (sequelize) => {
         email: {
             type: DataTypes.TEXT,
             allowNull: false,
+            unique: true,
             validate: {
                 isEmail: {
                     msg: "Email is required"
@@ -35,8 +36,8 @@ module.exports = (sequelize) => {
     }, {
         sequelize: sequelize,
         createdAt: false,
-        modelName: 'User',
-        tableName: 'Users',
+        modelName: "User",
+        tableName: "Users",
         timestamps: false,
         hooks: {
             beforeUpdate: (user, options) => {

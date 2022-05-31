@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
 
-    sequelize.define("Move", {
+    sequelize.define("Movement", {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -11,21 +11,21 @@ module.exports = (sequelize) => {
         },
         type: {
             type: DataTypes.ENUM,
-            values: ['ENTRY', 'EXIT'],
+            values: ["ENTRY", "EXIT"],
             allowNull: false,
             validate: {
                 isIn: {
-                    args: ['ENTRY', 'EXIT'],
+                    args: [["ENTRY", "EXIT"]],
                     msg: "Required is ENTRY or EXIT",
                 }
             }
         },
-        name: {
+        concept: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: "Is required name"
+                    msg: "Is required concept"
                 },
                 len: {
                     args: [2, 25],
@@ -56,8 +56,8 @@ module.exports = (sequelize) => {
         }
     }, {
         sequelize: sequelize,
-        modelName: 'Move',
-        tableName: 'Moves',
+        modelName: "Movement",
+        tableName: "Movements",
         timestamps: false,
         hooks: {
             beforeCreate: (user, options) => {

@@ -1,8 +1,8 @@
-let express = require('express');
+let express = require("express");
 let router = express.Router();
-const { findOrCreate, editName } = require('../controllers/userController');
+const { findOrCreate } = require("../controllers/userController");
 
-router.post('/', findOrCreate);
-router.put('/', editName)
+router.post("/", findOrCreate);
+/* router.put("/", editName) */
 
 module.exports = router;
